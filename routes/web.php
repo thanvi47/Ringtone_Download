@@ -23,8 +23,9 @@ Auth::routes(['register' => false,]
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(array('namespace'=>'Backend'),function (){
-    Route::get('/ringtones', [App\Http\Controllers\Backend\RingtoneController::class, 'create']);
+
 
 
 });
 
+Route::resource('ringtones', 'App\Http\Controllers\Backend\RingtoneController');

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ringtone;
+
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Str;
 
 class RingtoneController extends Controller
 {
@@ -14,7 +18,7 @@ class RingtoneController extends Controller
      */
     public function index()
     {
-        //
+        dd('boo');
     }
 
     /**
@@ -35,7 +39,28 @@ class RingtoneController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $this->validate($request, [
+        'title' => 'required',
+        'description' => 'required',
+        'file' => 'required',
+        'category' => 'required',
+      ]);
+      $fileName=$request->file->hashName();
+      $format=$request->file->getClientOriginalExtension();
+      $size=$request->file->getSize();
+      $request->file->move(public_path('audio'),$fileName);
+
+      $ringtones = new Ringtone();
+        $ringtones->title = $request->title;
+        $ringtones->description = $request->description;
+        $ringtones->slug =Str::slug($request->title);
+        $ringtones->file = $request->file;
+        $ringtones->format = $format;
+        $ringtones->size = $size;
+        $ringtones->category_id = $request->category;
+        $ringtones->save();
+        return redirect()->back()->with('message','Ringtone added successfully');
+
     }
 
     /**

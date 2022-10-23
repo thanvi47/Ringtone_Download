@@ -21,6 +21,7 @@ $table->string('slug');
 $table->string('file');
 $table->string('format')->nullable();
 $table->string('size')->nullable();
+$table->string('download')->default(0);
 $table->string('category_id');
 
 
