@@ -18,7 +18,8 @@ class RingtoneController extends Controller
      */
     public function index()
     {
-        dd('boo');
+        $ringtones = Ringtone::all();
+        return view('backend.ringtone.index', compact('ringtones'));
     }
 
     /**
@@ -54,7 +55,7 @@ class RingtoneController extends Controller
         $ringtones->title = $request->title;
         $ringtones->description = $request->description;
         $ringtones->slug =Str::slug($request->title);
-        $ringtones->file = $request->file;
+        $ringtones->file = $fileName;
         $ringtones->format = $format;
         $ringtones->size = $size;
         $ringtones->category_id = $request->category;
