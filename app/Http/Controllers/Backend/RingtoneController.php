@@ -139,6 +139,9 @@ return view('backend.ringtone.edit',compact('ringtone'));
      */
     public function destroy($id)
     {
-        //
+        $ringtone=Ringtone::find($id);
+        unlink(public_path('audio/'.$ringtone->file));
+        $ringtone->delete();
+        return redirect()->back()->with('message','Ringtone deleted successfully');
     }
 }
