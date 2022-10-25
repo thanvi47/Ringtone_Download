@@ -13,6 +13,7 @@
               <table class="table table-striped">
                  <thead>
                       <tr>
+                          <th scope="col">#</th>
                           <th scope="col">Title</th>
                           <th scope="col">Description</th>
                           <th scope="col">Category</th>
@@ -29,7 +30,7 @@
                             <th scope="row">{{$key+1}}</th>
                             <td>{{$ringtone->title}}</td>
                             <td>{{$ringtone->description}}</td>
-                            <td>{{$ringtone->category_id}}</td>
+                            <td>{{$ringtone->category->name}}</td>
                             <td><audio controls>
                                 <source src="{{asset('/audio/'.$ringtone->file)}}" type="audio/mpeg">
                                 </audio>
