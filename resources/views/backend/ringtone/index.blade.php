@@ -35,12 +35,14 @@
                             <td>{{$ringtone->title}}</td>
                             <td>{{$ringtone->description}}</td>
                             <td>{{$ringtone->category->name}}</td>
+                            <td class="text-center">{{$ringtone->download}}</td>
                             <td><audio controls onplay="pauseOthers()">
                                 <source src="{{asset('/audio/'.$ringtone->file)}}" type="audio/mpeg">
                                 </audio>
                             </td>
-                            <td>{{$ringtone->size/1000}}Kb</td>
+
                             <td>{{$ringtone->format}}</td>
+                            <td>{{$ringtone->size/1000}}Kb</td>
                             <td>
                                 <a href="{{route('ringtones.edit',$ringtone->id)}}" class="btn btn-outline-primary">Edit</a>
 </td>
@@ -75,7 +77,8 @@
 @endsection
     <script type="text/javascript">
         function pauseOthers(element) {
-           $("audio").not(element).each(function(index, audio) {
+
+           $ ("audio").not(element).each(function(index, audio) {
               audio.pause() ;
            })
 

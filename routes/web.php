@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Auth::routes(['register' => false,]
      //Registration Routes...
@@ -28,4 +28,5 @@ Route::group(array('namespace'=>'Backend'),function (){
 
 });
 
-Route::resource('ringtones', 'App\Http\Controllers\Backend\RingtoneController');
+Route::resource('ringtones', 'App\Http\Controllers\Backend\RingtoneController')->middleware('auth');
+Route::get('/', 'App\Http\Controllers\Frontend\RingtoneController@index');
