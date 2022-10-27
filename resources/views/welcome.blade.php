@@ -14,7 +14,7 @@
                         </audio>
                     </div>
                     <div class="card-footer">
-                        <a href="" class="text-decoration-none ">Info and Download Ringtone</a>
+                        <a href="{{url('/ringtones',[$ringtone->id,$ringtone->slug])}}" class="text-decoration-none ">Info and Download Ringtone</a>
                     </div>
                 </div>
                 @endforeach
@@ -25,7 +25,7 @@
                 </div>
                 @foreach(\App\Models\Category::all() as $category)
                 <div class="card-header bg-opacity-75">
-                    <a href="" class="text-decoration-none ">   {{$category->name}}</a>
+                    <a href="{{url('category',$category->id)}}" class="text-decoration-none ">   {{$category->name}}</a>
                 </div>
                 @endforeach
 

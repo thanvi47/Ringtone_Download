@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ringtone;
+
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class RingtoneController extends Controller
 {
@@ -46,9 +49,10 @@ class RingtoneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,$slug)
     {
-        //
+$ringtone = Ringtone::where('id',$id)->where('slug',$slug)->first();
+return view('show',compact('ringtone'));
     }
 
     /**
@@ -83,5 +87,19 @@ class RingtoneController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function downloadRingtone($id){
+        $ringtone=Ringtone::findOrFail($id);
+        $ringtonePath=$ringtone->file;
+        $filePath=public_path('audio/').$ringtonePath;
+        $ringtone->increment('download');
+        $ringtone->save();
+        return Response::download($filePath);
+
+    }
+    public function category($id){
+$ringtones=Ringtone::where('category_id',$id)->get();
+
+return view('ringtone-category',compact('ringtones'));
     }
 }
