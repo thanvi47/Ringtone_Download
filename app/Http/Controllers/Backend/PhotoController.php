@@ -16,7 +16,8 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        //
+       $photos=Photo::all();
+         return view('backend.photo.index',compact('photos'));
     }
 
     /**
@@ -108,6 +109,12 @@ class PhotoController extends Controller
      */
     public function destroy($id)
     {
-        //
+    $photo=Photo::find($id);
+    $photo->delete();
+    unlink(public_path('uploads/'.$photo->file));
+    unlink(public_path('uploads/1280x1024/'.$photo->file));
+    unlink(public_path('uploads/316x255/'.$photo->file));
+    unlink(public_path('uploads/128x95/'.$photo->file));
+    return redirect()->back()->with('message','Photo has been deleted successfully');
     }
 }
