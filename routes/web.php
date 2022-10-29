@@ -29,6 +29,7 @@ Route::group(array('namespace'=>'Backend'),function (){
 });
 
 Route::resource('ringtones', 'App\Http\Controllers\Backend\RingtoneController')->middleware('auth');
+Route::resource('photos', 'App\Http\Controllers\Backend\PhotoController')->middleware('auth');
 Route::get('/', 'App\Http\Controllers\Frontend\RingtoneController@index');
 Route::get('/ringtones/{id}/{slug}', [App\Http\Controllers\Frontend\RingtoneController::class,'show']);
 Route::post('/ringtones/download/{id}', [App\Http\Controllers\Frontend\RingtoneController::class,'downloadRingtone'])->name('ringtones.download');

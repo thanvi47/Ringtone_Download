@@ -38,6 +38,11 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        @if(!Auth::check())
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('/')}}"> Ringtones</a>
+                            </li>
+                        @endif
                         @if(Auth::check())
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('ringtones.index')}}">Manage Ringtone</a>

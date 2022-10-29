@@ -21,7 +21,9 @@
                     </div>
                 @endforeach
                 @else
-                <strong>No Ringtone </strong>
+                <strong>No Ringtone </strong><br>
+                    <a href="{{url('/')}}">
+                        <button class="btn btn-outline-info">Back</button></a>
                     @endif
             </div>
             <div class="col-md-4 mt-5 card">
