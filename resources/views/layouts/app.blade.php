@@ -40,12 +40,17 @@
                     <ul class="navbar-nav ms-auto">
                         @if(!Auth::check())
                             <li class="nav-item">
+                                <a class="nav-link" href="{{url('wallpaper')}}"> Wallpapers</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{url('/')}}"> Ringtones</a>
                             </li>
                         @endif
                         @if(Auth::check())
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('ringtones.index')}}">Manage Ringtone</a>
+                        </li><li class="nav-item">
+                            <a class="nav-link" href="{{route('photos.index')}}">Manage Photos</a>
                         </li>
                         @endif
                         <!-- Authentication Links -->

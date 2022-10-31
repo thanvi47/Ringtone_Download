@@ -34,3 +34,11 @@ Route::get('/', 'App\Http\Controllers\Frontend\RingtoneController@index');
 Route::get('/ringtones/{id}/{slug}', [App\Http\Controllers\Frontend\RingtoneController::class,'show']);
 Route::post('/ringtones/download/{id}', [App\Http\Controllers\Frontend\RingtoneController::class,'downloadRingtone'])->name('ringtones.download');
 Route::get('/category/{id}',[\App\Http\Controllers\Frontend\RingtoneController::class,'category']);
+
+
+
+Route::get('/wallpaper',[\App\Http\Controllers\Frontend\PhotoController::class,'wallpaper']);
+Route::post('download1/{id}',[\App\Http\Controllers\Frontend\PhotoController::class,'download1920x1080'])->name('download1');
+Route::post('download2/{id}',[\App\Http\Controllers\Frontend\PhotoController::class,'download1280x1024'])->name('download2');
+Route::post('download3/{id}',[\App\Http\Controllers\Frontend\PhotoController::class,'download316x255'])->name('download3');
+Route::post('download4/{id}',[\App\Http\Controllers\Frontend\PhotoController::class,'download118x95'])->name('download4');

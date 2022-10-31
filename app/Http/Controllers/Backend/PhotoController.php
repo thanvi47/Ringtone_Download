@@ -86,7 +86,9 @@ class PhotoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $photo=Photo::find($id);
+        return view('backend.photo.edit',compact('photo'));
+
     }
 
     /**
@@ -98,7 +100,58 @@ class PhotoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+
+        ]);
+        $photo = Photo::find($id);
+        $fileName = $photo->file;
+        $format = $photo->format;
+        $size = $photo->size;
+        if ($request->hasFile('image')) {
+
+            $image = $request->file('image');
+            $newfilename = $image->hashName();
+            $format = $request->image->getClientOriginalExtension();
+            $size = $request->image->getSize();
+            $path = 'uploads/' . $newfilename;
+            $path1 = 'uploads/1280x1024/' . $newfilename;
+            $path2 = 'uploads/316x255/' . $newfilename;
+            $path3 = 'uploads/128x95/' . $newfilename;
+            Image::make($image->getRealPath())->resize(1920, 1080)->save($path);
+            Image::make($image->getRealPath())->resize(1280, 1024)->save($path1);
+            Image::make($image->getRealPath())->resize(316, 255)->save($path2);
+            Image::make($image->getRealPath())->resize(128, 95)->save($path3);
+            unlink(public_path('uploads/' . $photo->file));
+            unlink(public_path('uploads/1280x1024/' . $photo->file));
+            unlink(public_path('uploads/316x255/' . $photo->file));
+            unlink(public_path('uploads/128x95/' . $photo->file));
+            $photo->title = $request->title;
+            $photo->description = $request->description;
+
+            $photo->file = $newfilename;
+            $photo->format = $format;
+            $photo->size = $size;
+
+
+            $photo->save();
+            return redirect()->back()->with('message', 'Photo updated successfully');
+        } else{
+
+            $photo->title = $request->title;
+        $photo->description = $request->description;
+
+        $photo->file = $fileName;
+        $photo->format = $format;
+        $photo->size = $size;
+
+
+        $photo->save();
+        return redirect()->back()->with('message', 'Photo updated successfully');
+
+
+    }
     }
 
     /**
